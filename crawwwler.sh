@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# Define the ASCII art image
+IMAGE="
+
+ +-+-+-+-+-+-+-+-+-+-+-+-+
+ |c|r|a|w|w|w|l|e|r|.|s|h|
+ +-+-+-+-+-+-+-+-+-+-+-+-+
+
+"
+
+# Print the ASCII art image
+echo "$IMAGE"
+
 # Ask the user for the URL of the website to crawl
 read -p "Enter the URL of the website to crawl: " url
 
