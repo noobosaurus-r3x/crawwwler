@@ -1,22 +1,37 @@
 #!/bin/bash
 
+# Define the usage instructions
+usage() {
+  echo "Usage: $0 [URL]"
+  exit 1
+}
+
+# Check if the URL argument was provided
+if [ -z "$1" ]; then
+  usage
+fi
+
 # Define the ASCII art image
 IMAGE="
-
  +-+-+-+-+-+-+-+-+-+-+-+-+
  |c|r|a|w|w|w|l|e|r|.|s|h|
  +-+-+-+-+-+-+-+-+-+-+-+-+
-
 "
 
 # Print the ASCII art image
 echo "$IMAGE"
 
-# Prompt the user to enter the URL of the website to crawl
-read -p "Enter the URL of the website to crawl: " url
+# Define the URL to crawl
+url="$1"
 
 # Download the HTML page from the website
 response=$(curl -sL "$url")
+
+# Check if curl was successful
+if [ $? -ne 0 ]; then
+  echo "Error: failed to download HTML page"
+  exit 1
+fi
 
 # Extract all the links from the HTML page
 links=$(echo "$response" | grep -oP '(?<=<a href=")[^"]*')
