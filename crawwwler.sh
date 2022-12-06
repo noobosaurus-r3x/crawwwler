@@ -36,6 +36,23 @@ fi
 # Extract all the links from the HTML page
 links=$(echo "$response" | grep -oP '(?<=<a href=")[^"]*')
 
+# Define a function to check the HTTP status code of a URL
+check_status() {
+  local url=$1
+
+  # Get the HTTP status code of the URL
+  local code=$(curl -sL -o /dev/null -w "%{http_code}" "$url")
+
+  # Print the URL and its HTTP status code, truncating the URL to 100 characters
+  if [ $code -eq 200 ]; then
+    # Print the URL in green if the status code is 200
+    printf "%-100s \e[32m%s\e[0m\n" "${url:0:100}" "$code"
+  else
+    # Print the URL in red if the status code is not 200
+    printf "%-100s \e[31m%s\e[0m\n" "${url:0:100}" "$code"
+  fi
+}
+
 # Loop through each link and check its HTTP status code
 for link in $links; do
 
@@ -48,15 +65,5 @@ for link in $links; do
     url="$url/$link"
   fi
 
-  # Get the HTTP status code of the link
-  code=$(curl -sL -o /dev/null -w "%{http_code}" "$url")
-
-  # Print the URL and its HTTP status code, truncating the URL to 100 characters
-  if [ $code -eq 200 ]; then
-    # Print the URL in green if the status code is 200
-    printf "%-100s \e[32m%s\e[0m\n" "${url:0:100}" "$code"
-  else
-    # Print the URL in red if the status code is not 200
-    printf "%-100s \e[31m%s\e[0m\n" "${url:0:100}" "$code"
-  fi
+  check_status "$url"
 done
