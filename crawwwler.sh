@@ -67,3 +67,8 @@ for link in $links; do
 
   check_status "$url"
 done | tee "results_$1.txt"
+
+# Print the file path of the output file
+echo "--------------------------------------------------"
+echo "You can find the results here: $(readlink -f "results_$1.txt")"
+echo "--------------------------------------------------"
