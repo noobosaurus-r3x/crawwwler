@@ -66,4 +66,4 @@ for link in $links; do
   fi
 
   check_status "$url"
-done
+done | tee "results_$1.txt"
