@@ -8,10 +8,10 @@ This script is a simple web crawler written in Bash. It takes a URL as an argume
 
 Replace URL with the website you want to crawl.
 
-The results are saved in a text file named results_[sanitized_url].txt, where [sanitized_url] is the URL argument with special characters replaced by underscores.
+The results are saved in a text file named results_<URL>.txt, where <URL> is the URL argument with special characters replaced by underscores.
 
 ### Example :
 
-```./crawler.sh -u https://example.com```
+```./crawler.sh -u https://noobosaurusr3x.fr```
 
-This will download the HTML from https://example.com, extract all the links, check their HTTP status codes, and save the results in a file named results_https___example_com.txt.
+This will download the HTML from https://noobosaurusr3x.fr, extract all the links, check their HTTP status codes, and save the results in a file named results_https_noobosaurusr3x_fr.txt.
